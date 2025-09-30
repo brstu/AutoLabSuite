@@ -1,11 +1,11 @@
 Стратегия тестирования AI-модулей (резюме и варианты реализации)
 
 Цель
------
+
 Обеспечить набор тестов и утилит для верификации поведения AI-модулей (оценивание, аннотация, классификация), которые можно запускать локально, в CI и как часть интеграций.
 
 Контракты и форматы
---------------------
+
 - Вход (payload): JSON-объект, содержащий минимум:
   - student_id: string
   - submission: string | structured (code, text, artifacts)
@@ -25,6 +25,7 @@
 
 Варианты реализации тестирования
 ---------------------------------
+
 1) Unit (mock) tests — быстрые, детерминированные
    - pytest с mock/requests-mock
    - pytest fixtures для подстановки payloads
@@ -53,6 +54,7 @@
 
 Практические артефакты (примеры)
 ---------------------------------
+
 - `ml/tests/send_task.py` — утилита CLI для отправки payload на endpoint (mock/real)
 - `ml/tests/test_model_integration.py` — pytest примеры (mocked и `@pytest.mark.integration`)
 - `ml/tests/sample_payloads.json` — набор тестовых payloads
@@ -60,6 +62,7 @@
 
 Контрольные случаи (edge cases)
 -------------------------------
+
 - пустая или отсутствующая `submission`
 - превышение `max_score` в ответе
 - длительный ответ / таймаут
@@ -68,6 +71,7 @@
 
 Как запускать локально (рекомендации)
 ------------------------------------
+
 1. Создать virtualenv: `python -m venv .venv`;
 2. Активировать: `.venv\Scripts\Activate.ps1` (PowerShell);
 3. Установить deps: `pip install -r ml/tests/requirements.txt`;
@@ -76,14 +80,15 @@
 
 CI pipeline suggestions
 -----------------------
+
 - job: test:fast -> runs unit tests
 - job: test:integration -> runs only if secrets are available or on manual trigger
 - job: load -> nightly schedule
 
 Next steps
 ----------
+
 1. Добавить JSON Schema для payload/response и валидаторы в тесты.
 2. Добавить Hypothesis-based property tests для генерации граничных payloads.
 3. Подключить contract testing (WireMock/VCR) для стабильного E2E тестирования.
 4. Встроить тесты в CI с разделением по тегам (`unit`, `integration`, `load`).
-

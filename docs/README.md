@@ -26,7 +26,7 @@
 - `examples/sample-lab-report.md` — пример отчёта
 
 ### AI модели
- 
+
 - `ai-models/model-strategy.md` — стратегия использования
 - `ai-models/metrics.md` — метрики качества AI
 - `templates/model-card-template.md` — карточка модели
