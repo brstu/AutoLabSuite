@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
+    hooks:
+      - id: markdownlint
+        args: ["--config", ".markdownlint.json", "**/*.md"]
+  - repo: local
+    hooks:
+      - id: remark-lint
+        name: remark-lint
+        entry: npx remark . --ext .md,.mdx --ignore-path .remarkignore
+        language: node
+        pass_filenames: false
+        stages: [commit]

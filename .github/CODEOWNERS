@@ -1,0 +1,29 @@
+# CODEOWNERS for AutoLabSuite
+# Формат: путь  @github-user-or-team
+# Правила применяются снизу вверх (последнее совпадение выигрывает).
+# Ротация Iteration Lead НЕ меняет codeowner автоматически, но IL отвечает за актуальность.
+# CoreOrbit (CORE) выступает глобальным fallback владельцем.
+
+# Глобальный fallback
+*       @coreorbit-leads
+
+# Frontend (NeonFox)
+/apps/frontend/   @neonfox-lead @neonfox-dev1 @neonfox-dev2
+
+# Backend (ByteForge)
+/services/backend/   @byteforge-lead @byteforge-dev1 @byteforge-dev2
+
+# Infrastructure (CloudNova)
+/infra/   @cloudnova-lead @cloudnova-dev1 @cloudnova-dev2
+
+# ML (VectorPulse)
+/ml/   @vectorpulse-lead @vectorpulse-dev1 @vectorpulse-dev2
+
+# Docs (общие)
+/docs/   @coreorbit-leads @byteforge-lead @neonfox-lead
+
+# Critical configuration
+/.github/   @coreorbit-leads
+/package.json   @coreorbit-leads @byteforge-lead
+
+# TODO: при появлении отдельных сервисов разбить /services/backend на подкаталоги и назначить точечных владельцев.

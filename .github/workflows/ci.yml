@@ -1,0 +1,69 @@
+name: CI Docs Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  super-lint:
+    name: Lint Markdown and HTML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Super-Linter
+        uses: github/super-linter@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: true
+          # Force markdownlint to load the repo-root config
+          LINTER_RULES_PATH: .
+          MARKDOWN_CONFIG_FILE: .markdownlint.yaml
+          VALIDATE_MARKDOWN: true
+          VALIDATE_HTML: true
+          VALIDATE_CSS: true
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_YAML: true
+          VALIDATE_JSON: true
+          VALIDATE_DOCKERFILE_HADOLINT: true  
+          VALIDATE_SQL: true                  
+          # Exclude generated/build outputs from linting
+          FILTER_REGEX_EXCLUDE: "(node_modules/|tools/ci/out/)"
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm ci || npm install
+      - name: Markdown Lint (remark)
+        run: npm run lint:md
+      - name: Validate OpenAPI (if exists)
+        run: |
+          if [ -f docs/api/openapi.yaml ]; then npx @redocly/cli@latest lint docs/api/openapi.yaml; else echo 'No OpenAPI spec'; fi
+      - name: Generate Docs TOC (diff check)
+        run: |
+          python3 scripts/generate_adr_index.py || true
+          python3 scripts/generate_docs_toc.py || true
+          if [ -f docs/README.generated.md ]; then echo 'Generated TOC:'; head -n 20 docs/README.generated.md; fi
+      - name: Check TOC divergence
+        run: |
+          if [ -f docs/README.generated.md ]; then diff -u docs/README.md docs/README.generated.md || echo 'TOC differences detected (informational)'; fi
+      - name: Build Redoc HTML
+        run: |
+          if [ -f docs/api/openapi.yaml ]; then npx @redocly/cli@latest build-docs docs/api/openapi.yaml -o openapi.html; fi
+      - name: Upload Redoc artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+            name: openapi-docs
+            path: openapi.html

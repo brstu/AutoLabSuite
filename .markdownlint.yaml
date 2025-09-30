@@ -1,0 +1,29 @@
+---
+default: true  # Start with all standard rules enabled unless overridden below
+
+# MD013 Line length: disabled to allow wide tables, long Russian phrases, URLs
+MD013: false
+
+# MD033 Inline HTML: allowed (tables, badges, potential custom formatting)
+MD033: false
+
+# MD003 Heading style: enforce atx (#) for consistency
+MD003:
+  style: atx
+
+# MD009 Trailing spaces: strict => disallow except where Markdown semantics (2 spaces line break) explicitly used
+MD009:
+  strict: true
+
+# MD040 Fenced code blocks should declare language; disabled to avoid noise in early phase
+MD040: false
+
+# MD032 Blank line before list: disabled to keep compact definition blocks
+MD032: false
+
+# MD034 Bare URL emphasis: disabled to allow raw URLs if they appear
+MD034: false
+
+# MD004 Unordered list style: enforce single marker (`-`) for cleaner diffs
+MD004:
+  style: dash

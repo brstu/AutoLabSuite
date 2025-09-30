@@ -1,0 +1,505 @@
+openapi: 3.1.0
+info:
+  title: LabAutomation API
+  version: 0.1.0
+  description: >-
+    Minimal начальный OpenAPI для системы автоматизированного оценивания.
+servers:
+  - url: https://api.example.com/v1
+tags:
+  - name: System
+    description: Системные эндпоинты
+  - name: Submissions
+    description: Управление отправками работ
+  - name: Evaluations
+    description: Результаты оценивания
+  - name: Rubrics
+    description: Управление рубриками
+  - name: Auth
+    description: Аутентификация и авторизация
+paths:
+  /health:
+    get:
+      summary: Health probe
+      tags: [System]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /submissions:
+    post:
+      summary: Создать отправку лабораторной
+      tags: [Submissions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/ServerError' }
+    get:
+      summary: Список отправок (пагинация)
+      tags: [Submissions]
+      parameters:
+        - in: query
+          name: studentId
+          schema:
+            type: string
+        - in: query
+          name: labId
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Список отправок
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Submission'
+                  total:
+                    type: integer
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /submissions/{submissionId}:
+    get:
+      summary: Получить отправку
+      tags: [Submissions]
+      parameters:
+        - name: submissionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Submission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /evaluations/{evaluationId}:
+    get:
+      summary: Получить результат оценивания
+      tags: [Evaluations]
+      parameters:
+        - name: evaluationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Evaluation detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evaluation'
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /auth/token:
+    post:
+      summary: Получить JWT токен
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: bearer
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /rubrics:
+    get:
+      summary: Список опубликованных рубрик
+      tags: [Rubrics]
+      responses:
+        '200':
+          description: Rubric list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rubric'
+        '500': { $ref: '#/components/responses/ServerError' }
+    post:
+      summary: Создать черновик рубрики
+      tags: [Rubrics]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RubricDraftCreate'
+      responses:
+        '201':
+          description: Created draft
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rubric'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /rubrics/{rubricId}:
+    get:
+      summary: Получить рубрику
+      tags: [Rubrics]
+      parameters:
+        - name: rubricId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Rubric
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rubric'
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/ServerError' }
+    patch:
+      summary: Обновить черновик рубрики
+      tags: [Rubrics]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: rubricId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RubricDraftUpdate'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rubric'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /rubrics/{rubricId}/publish:
+    post:
+      summary: Опубликовать рубрику (bump версии)
+      tags: [Rubrics]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: rubricId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rubric'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /webhooks/evaluation-completed:
+    post:
+      summary: (Webhook) Уведомление о завершении оценивания
+      description: Вызывается системой для сторонних интеграций.
+      tags: [Evaluations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [evaluationId, submissionId, status]
+              properties:
+                evaluationId:
+                  type: string
+                submissionId:
+                  type: string
+                status:
+                  type: string
+                  enum: [completed, failed]
+      responses:
+        '202':
+          description: Accepted
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /evaluations:
+    get:
+      summary: Список результатов оценивания
+      tags: [Evaluations]
+      parameters:
+        - in: query
+          name: submissionId
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Evaluations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Evaluation'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
+components:
+  schemas:
+    SubmissionCreate:
+      type: object
+      required: [studentId, labId, repositoryUrl]
+      properties:
+        studentId:
+            type: string
+        labId:
+            type: string
+        repositoryUrl:
+            type: string
+        commitHash:
+            type: string
+            nullable: true
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [queued, running, completed, failed]
+        score:
+          type: number
+          format: float
+          nullable: true
+        breakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/CriterionScore'
+    CriterionScore:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        weight:
+          type: number
+        value:
+          type: number
+          nullable: true
+        max:
+          type: number
+        comments:
+          type: string
+          nullable: true
+        aiAssisted:
+          type: boolean
+    Evaluation:
+      type: object
+      properties:
+        id:
+          type: string
+        submissionId:
+          type: string
+        completedAt:
+          type: string
+          format: date-time
+        summary:
+          type: string
+        rubricVersion:
+          type: string
+        modelSnapshot:
+          type: string
+    Rubric:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        status:
+          type: string
+          enum: [draft, published]
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/CriterionDef'
+        aggregation:
+          type: string
+    CriterionDef:
+      type: object
+      properties:
+        id:
+          type: string
+        weight:
+          type: number
+        method:
+          type: string
+    RubricDraftCreate:
+      type: object
+      required: [id, criteria]
+      properties:
+        id:
+          type: string
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/CriterionDef'
+        aggregation:
+          type: string
+          default: weighted-sum
+    RubricDraftUpdate:
+      type: object
+      properties:
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/CriterionDef'
+        aggregation:
+          type: string
+    Error:
+      type: object
+      required: [error, code]
+      properties:
+        code:
+          type: string
+          description: Внутренний или стандартный код ошибки (ERR_*)
+          example: ERR_NOT_FOUND
+        error:
+          type: string
+          description: Короткое описание
+          example: Resource not found
+        details:
+          type: object
+          description: Дополнительные поля (контекст)
+          additionalProperties: true
+        traceId:
+          type: string
+          description: Корреляционный идентификатор трассировки
+    PaginationMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+  responses:
+    BadRequest:
+      description: Некорректный запрос
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Требуется аутентификация
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Внутренняя ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

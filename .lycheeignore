@@ -1,0 +1,5 @@
+# Ignore local/placeholder links
+localhost
+127.0.0.1
+# Ignore badge endpoints (dynamic)
+https://github.com/brstu/AutoLabSuite/actions/workflows/ci.yml/badge.svg

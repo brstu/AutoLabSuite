@@ -1,0 +1,14 @@
+{
+  "assignment_1": {
+    "student_id": "stu-123",
+    "submission": "def add(a, b):\n    return a + b",
+    "language": "python",
+    "metadata": {"max_score": 10}
+  },
+  "essay_1": {
+    "student_id": "stu-456",
+    "submission": "Explain the theory of relativity in simple terms.",
+    "language": "en",
+    "metadata": {"max_score": 20}
+  }
+}
