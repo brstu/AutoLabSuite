@@ -13,7 +13,23 @@
 | CloudNova | DEVOPS | #team-cloudnova | Cloud Nova Crew | Инфраструктура: CI/CD, IaC, observability, security |
 | VectorPulse | ML | #team-vectorpulse | Vector Pulse Lab | ML & AI: модели эмбеддингов, классификаторы, генерация фидбека |
 | CoreOrbit | CORE | #team-coreorbit | Core Orbit Council | Сквозное руководство: приоритизация, продуктовый |
+| Mobile | MOB | #team-mobile | Mobile Squad | Мобильное приложение: мобильный UI, нативные интеграции |
 |           |      |                |                    | бэклог, риски, согласование архитектуры |
+
+### Состав команд (реестр)
+
+Ниже — удобная таблица для быстрого поиска участников и их контактов в GitHub.
+
+| Команда | Группа | Курс | ФИО | GitHub аккаунт | Discord аккаунт |
+|---------|--------|------|-----|----------------|------------------|
+| NeonFox | FE | 3 курс | Иванов Иван | @ivanov-ivan | Ivanov#1234 |
+| ByteForge | BE | 3 курс | Петров Пётр | @petrov-petr | Petrov#2345 |
+| CloudNova | DEVOPS | 3 курс | Сидоров Сидор | @sidorov-sidor | Sidorov#3456 |
+| VectorPulse | ML | 3 курс | Алексеева Анна | @alekseeva-anna | Alexeeva#4567 |
+| Mobile | MOB | 3 курс | Новиков Николай | @novikov-n | Novikov#5678 |
+| CoreOrbit | CORE | 4 курс | Команда лидов | @core-orbit | CoreOrbit#0001 |
+
+Если вы хотите добавить или обновить запись — пожалуйста, откройте pull request с правкой этой таблицы.
 
 ## Обоснование нейминга
 
@@ -22,18 +38,21 @@
 - Ассоциативно отражают домен (VectorPulse → эмбеддинги / сигналы; CloudNova → инфраструктура;
   ByteForge → сборка бэкенда; NeonFox → скорость / ловкость интерфейса).
 
+## Структура ролей
+
+## Структура ролей
+
 ## Использование префиксов
 
 Префиксы применяются в:
 
-- Названия веток: `fe/feature-auth-ui`, `be/fix-grading-rule`, `devops/terraform-s3`, `ml/embedding-exp-v1`
+- Названия веток: `fe/feature-auth-ui`, `be/fix-grading-rule`, `devops/terraform-s3`, `ml/embedding-exp-v1`, `mobile/feature-login`
 - Pull Request заголовках: `[FE] Add rubric editor layout`
 - Issue заголовках: `[ML] Эксперимент с классификатором ошибок`
 - Коммитах (опционально): `FE: init table component`
 
 Рекомендуется использовать верхний регистр в PR/Issue для визуального сканирования.
 
-## Структура ролей
 
 - Iteration Lead (IL) — планирование спринта, модерация стендапов, отслеживание блокеров, handoff заметки.
 - Domain Owner (DO) — глубинная экспертиза по определённой подсистеме; не обязательно совпадает с IL.
@@ -72,6 +91,7 @@
   - `#team-byteforge` — канал команды ByteForge (BE)
   - `#team-cloudnova` — канал команды CloudNova (DevOps)
   - `#team-vectorpulse` — канал команды VectorPulse (ML)
+  - `#team-mobile` — канал команды Mobile (MOB)
   - `#team-coreorbit` — канал Core Orbit (coordination)
 - Категории: Cross-team / Project
   - `#eng-general` — общие инженерные обсуждения
@@ -86,6 +106,8 @@
 - `@DomainOwner` — эксперт по области, принимает технические решения
 - `@Reviewer` — ответственный за код-ревью на критичных PR
 - `@CoreOrbit` — продукт/тех лиды для принятия ключевых решений
+- `@Mobile` — участники мобильной команды (MOB); используйте для оповещений и обсуждений, связанных с мобильным приложением
+- `@MobileLead` — модератор мобильной команды, фасилитатор стендапов и релизов
 
 Практики и правила:
 
