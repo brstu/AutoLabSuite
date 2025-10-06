@@ -23,7 +23,9 @@
 | Команда | Группа | Курс | ФИО | GitHub аккаунт | Discord аккаунт |
 |---------|--------|------|-----|----------------|------------------|
 | NeonFox | FE | 3 курс | Иванов Иван | @ivanov-ivan | Ivanov#1234 |
-| ByteForge | BE | 3 курс | Петров Пётр | @petrov-petr | Petrov#2345 |
+| ByteForge | BE | 4 курс | Карпеш Никита | @Frosyka | frosenkal |
+| ByteForge | BE | 4 курс | Булавский Андрей | @andrei1910bl | nazariy_adamovich |
+| ByteForge | BE | 4 курс | Игнаткевич Кирилл | @pyrokekw | iamsxul |
 | CloudNova | DEVOPS | 3 курс | Сидоров Сидор | @sidorov-sidor | Sidorov#3456 |
 | VectorPulse | ML | 3 курс | Алексеева Анна | @alekseeva-anna | Alexeeva#4567 |
 | Mobile | MOB | 3 курс | Новиков Николай | @novikov-n | Novikov#5678 |
