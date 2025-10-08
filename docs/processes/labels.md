@@ -9,7 +9,7 @@
 | fe | Фронтенд задачи (NeonFox) |
 | be | Бэкенд задачи (ByteForge) |
 | ml | Модель / данные (VectorPulse) |
-| devops | Инфраструктура / CI/CD (CloudNova) |
+| devops | Инфраструктура / CI/CD (CloudForge) |
 | core | Сквозные / продукт / архитектура (CoreOrbit) |
 
 ## Тип задачи

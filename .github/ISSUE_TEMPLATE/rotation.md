@@ -8,7 +8,7 @@ labels: rotation, process
 
 ## Метаданные
 
-- Команда: (NeonFox / ByteForge / CloudNova / VectorPulse / CoreOrbit)
+- Команда: (NeonFox / ByteForge / CloudForge / VectorPulse / CoreOrbit)
 - Неделя: `YYYY-W##`
 - Уходящий IL: @user-old
 - Новый IL: @user-new

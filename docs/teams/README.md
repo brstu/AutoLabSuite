@@ -10,7 +10,7 @@
 |---------|-------------|-------------|----------------|----------------------------------------|
 | NeonFox | FE | #team-neonfox | Neon Fox Squad | Frontend: UI, UX, accessibility, интеграция с API |
 | ByteForge | BE | #team-byteforge | Byte Forge Guild | Backend ядро: API, бизнес-логика, рубрики, тест раннеры |
-| CloudNova | DEVOPS | #team-cloudnova | Cloud Nova Crew | Инфраструктура: CI/CD, IaC, observability, security |
+| CloudForge | DEVOPS | #team-cloudforge | Cloud Forge Crew | Инфраструктура: CI/CD, IaC, observability, security |
 | VectorPulse | ML | #team-vectorpulse | Vector Pulse Lab | ML & AI: модели эмбеддингов, классификаторы, генерация фидбека |
 | CoreOrbit | CORE | #team-coreorbit | Core Orbit Council | Сквозное руководство: приоритизация, продуктовый |
 | Mobile | MOB | #team-mobile | Mobile Squad | Мобильное приложение: мобильный UI, нативные интеграции |
@@ -20,16 +20,21 @@
 
 Ниже — удобная таблица для быстрого поиска участников и их контактов в GitHub.
 
-| Команда | Группа | Курс | ФИО | GitHub аккаунт | Discord аккаунт |
-|---------|--------|------|-----|----------------|------------------|
-| NeonFox | FE | 3 курс | Иванов Иван | @ivanov-ivan | Ivanov#1234 |
-| ByteForge | BE | 4 курс | Карпеш Никита | @Frosyka | frosenkal |
-| ByteForge | BE | 4 курс | Булавский Андрей | @andrei1910bl | nazariy_adamovich |
-| ByteForge | BE | 4 курс | Игнаткевич Кирилл | @pyrokekw | iamsxul |
-| CloudNova | DEVOPS | 3 курс | Сидоров Сидор | @sidorov-sidor | Sidorov#3456 |
-| VectorPulse | ML | 3 курс | Алексеева Анна | @alekseeva-anna | Alexeeva#4567 |
-| Mobile | MOB | 3 курс | Новиков Николай | @novikov-n | Novikov#5678 |
-| CoreOrbit | CORE | 4 курс | Команда лидов | @core-orbit | CoreOrbit#0001 |
+| Команда | Группа | Курс | ФИО | GitHub аккаунт | Discord аккаунт | GitHub team |
+|---------|--------|------|-----|----------------|------------------|-------------|
+| NeonFox | FE | 4 курс | Горкавчук Никита | @Exage | flo0ty | github-AutoLabSuite-NeonFox |
+| ByteForge | BE | 4 курс | Карпеш Никита | @Frosyka | frosenkal | github-AutoLabSuite-ByteForge |
+| ByteForge | BE | 4 курс | Булавский Андрей | @andrei1910bl | nazariy_adamovich | github-AutoLabSuite-ByteForge |
+| ByteForge | BE | 4 курс | Игнаткевич Кирилл | @pyrokekw | iamsxul | github-AutoLabSuite-ByteForge |
+| ByteForge | BE | 4 курс | Кухарчук Илья | @IlyaKukharchuk | chipsoed_ | github-AutoLabSuite-ByteForge |
+| CloudForge | DEVOPS | 2 курс | Сухобай Дмитрий Александрович   | @DERT1SE  | dertise | github-AutoLabSuite-CloudForge |
+| CloudForge | DEVOPS | 2 курс |  Хотько Иван Александрович   |  @empty513   | empty513  | github-AutoLabSuite-CloudForge |
+| CloudForge | DEVOPS | 2 курс |  Строчук Дмитрий Александрович     | @DmitryUnix    | yda4ya_   | github-AutoLabSuite-CloudForge |
+| VectorPulse | ML | 4 курс | Романюк Алексей | @Gomziakoff | gomziakov | github-AutoLabSuite-VectorPulse |
+| VectorPulse | ML | 4 курс | Вышинский Артем | @arciomwww | arciomwww | github-AutoLabSuite-VectorPulse |
+| VectorPulse | ML | 4 курс | Бусень Артем | @hudshiy1 | artemkadaun | github-AutoLabSuite-VectorPulse |
+| Mobile | MOB | |  |  |  | github-AutoLabSuite-Mobile |
+| CoreOrbit | CORE |  |  | |  | github-AutoLabSuite-CoreOrbit |
 
 Если вы хотите добавить или обновить запись — пожалуйста, откройте pull request с правкой этой таблицы.
 
@@ -37,7 +42,7 @@
 
 - Коротко, легко запоминается, современный оттенок.
 - Уникальные для поиска в репозитории и задачах.
-- Ассоциативно отражают домен (VectorPulse → эмбеддинги / сигналы; CloudNova → инфраструктура;
+ - Ассоциативно отражают домен (VectorPulse → эмбеддинги / сигналы; CloudForge → инфраструктура;
   ByteForge → сборка бэкенда; NeonFox → скорость / ловкость интерфейса).
 
 ## Структура ролей
@@ -64,7 +69,7 @@
 
 ## Пример цикла ротации (по неделям)
 
-| Неделя | NeonFox (FE) | ByteForge (BE) | CloudNova (DevOps) | VectorPulse (ML) |
+| Неделя | NeonFox (FE) | ByteForge (BE) | CloudForge (DevOps) | VectorPulse (ML) |
 |--------|--------------|----------------|--------------------|------------------|
 | 1      | A (IL)       | D (IL)         | G (IL)             | J (IL)           |
 | 2      | B (IL)       | E (IL)         | H (IL)             | K (IL)           |
@@ -91,7 +96,7 @@
 - Категория: Team channels
   - `#team-neonfox` — канал команды NeonFox (FE)
   - `#team-byteforge` — канал команды ByteForge (BE)
-  - `#team-cloudnova` — канал команды CloudNova (DevOps)
+  - `#team-cloudforge` — канал команды CloudForge (DevOps)
   - `#team-vectorpulse` — канал команды VectorPulse (ML)
   - `#team-mobile` — канал команды Mobile (MOB)
   - `#team-coreorbit` — канал Core Orbit (coordination)

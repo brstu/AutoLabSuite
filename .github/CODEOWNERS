@@ -13,8 +13,8 @@
 # Backend (ByteForge)
 /services/backend/   @byteforge-lead @byteforge-dev1 @byteforge-dev2
 
-# Infrastructure (CloudNova)
-/infra/   @cloudnova-lead @cloudnova-dev1 @cloudnova-dev2
+# Infrastructure (CloudForge)
+/infra/   @cloudforge-lead @cloudforge-dev1 @cloudforge-dev2
 
 # ML (VectorPulse)
 /ml/   @vectorpulse-lead @vectorpulse-dev1 @vectorpulse-dev2

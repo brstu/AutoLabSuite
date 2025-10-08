@@ -27,7 +27,7 @@ $Labels = @(
   @{ name='fe'; color='1E90FF'; description='Frontend tasks (NeonFox)' },
   @{ name='be'; color='5319E7'; description='Backend tasks (ByteForge)' },
   @{ name='ml'; color='A333D0'; description='ML / Data (VectorPulse)' },
-  @{ name='devops'; color='0E8A16'; description='Infra / CI (CloudNova)' },
+  @{ name='devops'; color='0E8A16'; description='Infra / CI (CloudForge)' },
   @{ name='core'; color='24292F'; description='Core / product / architecture' },
   @{ name='feature'; color='0E8A16'; description='New feature' },
   @{ name='bug'; color='D73A4A'; description='Bug / defect' },
