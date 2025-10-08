@@ -70,6 +70,12 @@
 - `ui-ux/user-roles.md` — роли и персоны
 - `ui-ux/wireframes.md` — wireframes placeholder
 
+### Литература
+
+- Краткий обзор литературы: [literature_review_short_ru.md](/docs/literature_review_short_ru.md)
+- Расширенный обзор литературы: [literature_review_extended_ru.md](/docs/literature_review_extended_ru.md)
+- Библиография (экспорт): [references.bib](/docs/references.bib), [references.ris](/docs/references.ris)
+
 ## Навигация
 
 Рекомендуемый путь чтения:
