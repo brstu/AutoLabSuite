@@ -1,4 +1,4 @@
-## Current Iteration Leads
+# Current Iteration Leads
 
 Этот файл — источник правды о текущих Iteration Lead (IL) для команд AutoLabSuite.
 Обновляйте запись через PR или автоматическую workflow после подтверждения в rotation issue.
