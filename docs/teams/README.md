@@ -27,9 +27,9 @@
 | ByteForge | BE | 4 курс | Булавский Андрей | @andrei1910bl | nazariy_adamovich |
 | ByteForge | BE | 4 курс | Игнаткевич Кирилл | @pyrokekw | iamsxul |
 | CloudNova | DEVOPS | 3 курс | Сидоров Сидор | @sidorov-sidor | Sidorov#3456 |
-| VectorPulse | ML | 4 курс | Романюк Алексей | Gomziakoff | gomziakov |
-| VectorPulse | ML | 4 курс | Вышинский Артем | arciomwww | arciomwww |
-| VectorPulse | ML | 4 курс | Бусень Артем | hudshiy1 | artemkadaun |
+| VectorPulse | ML | 4 курс | Романюк Алексей | @Gomziakoff | gomziakov |
+| VectorPulse | ML | 4 курс | Вышинский Артем | @arciomwww | arciomwww |
+| VectorPulse | ML | 4 курс | Бусень Артем | @hudshiy1 | artemkadaun |
 | Mobile | MOB | 3 курс | Новиков Николай | @novikov-n | Novikov#5678 |
 | CoreOrbit | CORE | 4 курс | Команда лидов | @core-orbit | CoreOrbit#0001 |
 
