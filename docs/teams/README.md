@@ -1,6 +1,6 @@
 # Команды AutoLabSuite
 
-Ниже описана организационная структура из 4 кросс-функциональных команд по 3 человека.
+Ниже описана организационная структура из 5 кросс-функциональных команд по 3 человека.
 Каждая команда работает в 1-недельных итерациях (спринтах).
 Каждый участник исполняет роль тим-лида (Iteration Lead) по 2 итерации подряд в течение ротационного цикла.
 
@@ -14,6 +14,7 @@
 | VectorPulse | ML | #team-vectorpulse | Vector Pulse Lab | ML & AI: модели эмбеддингов, классификаторы, генерация фидбека |
 | CoreOrbit | CORE | #team-coreorbit | Core Orbit Council | Сквозное руководство: приоритизация, продуктовый |
 | Mobile | MOB | #team-mobile | Mobile Squad | Мобильное приложение: мобильный UI, нативные интеграции |
+| 404BugNotFound | QA | #team-404BugNotFound | 404BugNotFound | Quality assurance: manual & automated testing, E2E, flaky-test management |
 |           |      |                |                    | бэклог, риски, согласование архитектуры |
 
 ### Состав команд (реестр)
@@ -34,6 +35,7 @@
 | VectorPulse | ML | 4 курс | Романюк Алексей | @Gomziakoff | gomziakov | github-AutoLabSuite-VectorPulse |
 | VectorPulse | ML | 4 курс | Вышинский Артем | @arciomwww | arciomwww | github-AutoLabSuite-VectorPulse |
 | VectorPulse | ML | 4 курс | Бусень Артем | @hudshiy1 | artemkadaun | github-AutoLabSuite-VectorPulse |
+| 404BugNotFound | QA |  |  |  |  | github-AutoLabSuite-404BugNotFound |
 | Mobile | MOB | |  |  |  | github-AutoLabSuite-Mobile |
 | CoreOrbit | CORE |  |  | |  | github-AutoLabSuite-CoreOrbit |
 
@@ -47,6 +49,7 @@
 
 Префиксы применяются в:
 - Названия веток: `fe/feature-auth-ui`, `be/fix-grading-rule`, `devops/terraform-s3`, `ml/embedding-exp-v1`, `mobile/feature-login`
+- Названия веток: `fe/feature-auth-ui`, `be/fix-grading-rule`, `devops/terraform-s3`, `ml/embedding-exp-v1`, `mobile/feature-login`, `qa/e2e-add-login-test`
 - Pull Request заголовках: `[FE] Add rubric editor layout`
 - Issue заголовках: `[ML] Эксперимент с классификатором ошибок`
 - Коммитах (опционально): `FE: init table component`
@@ -91,6 +94,7 @@
   - `#team-cloudforge` — канал команды CloudForge (DevOps)
   - `#team-vectorpulse` — канал команды VectorPulse (ML)
   - `#team-mobile` — канал команды Mobile (MOB)
+  - `#team-404BugNotFound` — канал команды 404BugNotFound (QA)
   - `#team-coreorbit` — канал Core Orbit (coordination)
 - Категории: Cross-team / Project
   - `#eng-general` — общие инженерные обсуждения
@@ -107,6 +111,7 @@
 - `@CoreOrbit` — продукт/тех лиды для принятия ключевых решений
 - `@Mobile` — участники мобильной команды (MOB); используйте для оповещений и обсуждений, связанных с мобильным приложением
 - `@MobileLead` — модератор мобильной команды, фасилитатор стендапов и релизов
+- `@QA` — участники команды тестирования (404BugNotFound); используйте для оповещений по багам, тестовым статусам и E2E прогону
 
 Практики и правила:
 
