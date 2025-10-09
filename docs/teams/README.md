@@ -23,6 +23,7 @@
 | Команда | Группа | Курс | ФИО | GitHub аккаунт | Discord аккаунт | GitHub team |
 |---------|--------|------|-----|----------------|------------------|-------------|
 | NeonFox | FE | 4 курс | Горкавчук Никита | @Exage | flo0ty | github-AutoLabSuite-NeonFox |
+| NeonFox | FE | 4 курс | Смердина Анастасия | @KotyaLapka | kotiajepka | github-AutoLabSuite-NeonFox |
 | ByteForge | BE | 4 курс | Карпеш Никита | @Frosyka | frosenkal | github-AutoLabSuite-ByteForge |
 | ByteForge | BE | 4 курс | Булавский Андрей | @andrei1910bl | nazariy_adamovich | github-AutoLabSuite-ByteForge |
 | ByteForge | BE | 4 курс | Игнаткевич Кирилл | @pyrokekw | iamsxul | github-AutoLabSuite-ByteForge |
