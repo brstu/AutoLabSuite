@@ -15,6 +15,7 @@
 | Grading Core | Оркестрация проверок, агрегация рубрик |
 | Test Runner Sandbox | Изолированное выполнение кода студента |
 | AI Assistance Service | Адаптеры LLM, эмбеддинги, пост-обработка ответов |
+| Model Serving (KServe) | Публикация моделей как HTTP/gRPC endpoint через Kubeflow/KServe |
 | Feedback Generator | Формирование текстов обратной связи и отчётов |
 | Storage Layer | S3/DB хранение артефактов и метаданных |
 | Audit & Trace | Логирование действий, событий пайплайна |
@@ -27,7 +28,7 @@
 2. Скачивание репозитория → упаковка Submission
 3. Планирование задач → очередь → Test Runner
 4. Сбор результатов тестов + статический анализ → Grading Core
-5. Запросы к AI (контекст: фрагменты кода, метрики) → ответы
+5. Запросы к AI/моделям: Grading Core вызывает модели через KServe InferenceService (REST/gRPC)
 6. Слияние рубрик + AI объяснений → Feedback
 7. Запись Evaluation + отчёт → Storage + Notification
 
@@ -45,6 +46,7 @@ erDiagram
 ## Ключевые технические решения
 
 - Модульный монолит со слоями (ingestion, grading, ai, api)
+- Model Serving через KServe (Kubeflow): единый контракт для вызова моделей, авто‑масштабирование (Knative), canary‑деплой
 - Событийная шина (event table / outbox на старте)
 - OpenTelemetry для трассировки пайплайна
 - Песочница: контейнеры с ограничением ресурсов (future)
@@ -80,4 +82,7 @@ check(input: SubmissionContext) -> CriterionScore
 - `../decision-records/adr-001-initial-stack.md`
 - `../grading/rubric-model.md`
 - `../ai-models/model-strategy.md`
+- `../ai-models/model-comparison.md`
+- `../ai-models/ml-tasks-kserve.md`
+- `../../infra/kubeflow-kserve.md`
 - `grading-module.md`
