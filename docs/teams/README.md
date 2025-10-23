@@ -36,7 +36,9 @@
 | VectorPulse | ML | 4 курс | Вышинский Артем | @arciomwww | arciomwww | github-AutoLabSuite-VectorPulse |
 | VectorPulse | ML | 4 курс | Бусень Артем | @hudshiy1 | artemkadaun | github-AutoLabSuite-VectorPulse |
 | 404BugNotFound | QA |  |  |  |  | github-AutoLabSuite-404BugNotFound |
-| Mobile | MOB | |  |  |  | github-AutoLabSuite-Mobile |
+| Mobile | MOB | 3 курс | Фолитарик Яна Леонидовна | FolitYan | f0lit_62066 | github-AutoLabSuite-Mobile |
+| Mobile | MOB | 2 курс | Тюрина Татьяна Алексеевна | TatyanaTy | tanya.ty | github-AutoLabSuite-Mobile |
+| Mobile | MOB | 2 курс | Стражевич Алеся Сергеевна | strazhevich-alesya | alesya_str | github-AutoLabSuite-Mobile |
 | CoreOrbit | CORE |  |  | |  | github-AutoLabSuite-CoreOrbit |
 
 Если вы хотите добавить или обновить запись — пожалуйста, откройте pull request с правкой этой таблицы.

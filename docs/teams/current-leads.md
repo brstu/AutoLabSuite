@@ -3,7 +3,7 @@
 Этот файл — источник правды о текущих Iteration Lead (IL) для команд AutoLabSuite.
 Обновляйте запись через PR или автоматическую workflow после подтверждения в rotation issue.
 
-Последнее обновление: 2025-10-08
+Последнее обновление: 2025-10-23
 
 | Team | Group | Курс | ФИО | GitHub аккаунт | Discord аккаунт | GitHub team |
 |------|-------|------|-----|----------------|-----------------|-------------|
@@ -11,6 +11,7 @@
 | CloudForge | DEVOPS | 2 курс | Строчук Дмитрий Александрович | @DmitryUnix | yda4ya_ | github-AutoLabSuite-Leaders |
 | ByteForge | BE | 4 курс | Кухарчук Илья | @IlyaKukharchuk | chipsoed_ | github-AutoLabSuite-Leaders |
 | VectorPulse | ML | 4 курс | Романюк Алексей | @Gomziakoff | gomziakov | github-AutoLabSuite-Leaders |
+| Mobile | MOB | 2 курс | Стражевич Алеся Сергеевна | strazhevich-alesya | alesya_str | github-AutoLabSuite-Leaders |
 
 ---
 
