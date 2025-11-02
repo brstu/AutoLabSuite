@@ -1,0 +1,28 @@
+- name: Create dedicated admin user and deploy SSH key
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    admin_user: ansible-admin
+    admin_shell: /bin/bash
+
+  tasks:
+    - name: Create admin user
+      user:
+        name: "{{ admin_user }}"
+        state: present
+        create_home: yes
+        shell: "{{ admin_shell }}"
+
+    - name: Ensure sudoers file for admin user (passwordless sudo)
+      copy:
+        dest: "/etc/sudoers.d/{{ admin_user }}"
+        content: "{{ admin_user }} ALL=(ALL) NOPASSWD:ALL\n"
+        mode: '0440'
+
+    - name: Deploy SSH public key to admin user
+      include_role:
+        name: ssh_key
+      vars:
+        target_user: "{{ admin_user }}"
+        ensure_sudo_user: false

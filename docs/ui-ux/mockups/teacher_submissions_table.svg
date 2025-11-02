@@ -1,0 +1,6 @@
+<svg width="600" height="160" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="160" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <text x="20" y="50" font-family="Arial, sans-serif" font-size="18" fill="#0F172A">Archived mockup</text>
+  <text x="20" y="80" font-family="Arial, sans-serif" font-size="14" fill="#475569">Use Holst board for UI prototypes</text>
+  <text x="20" y="110" font-family="Arial, sans-serif" font-size="12" fill="#64748B">docs/ui-ux/holst.md</text>
+</svg>

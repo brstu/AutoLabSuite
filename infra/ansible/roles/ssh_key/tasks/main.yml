@@ -1,0 +1,24 @@
+---
+- name: Install SSH public key for target user
+  block:
+    - name: Ensure target user exists (optional)
+      user:
+        name: "{{ target_user }}"
+        state: present
+        create_home: yes
+        shell: /bin/bash
+      when: ensure_sudo_user | default(true)
+
+    - name: Create sudoers file for target user (passwordless sudo) (optional)
+      copy:
+        dest: "{{ sudoers_file }}"
+        content: "{{ target_user }} ALL=(ALL) NOPASSWD:ALL\n"
+        mode: '0440'
+      when: ensure_sudo_user | default(true) and sudo_nopasswd | default(true)
+
+    - name: Install SSH public key for target user
+      authorized_key:
+        user: "{{ target_user | default(ansible_user | default('root')) }}"
+        key: "{{ lookup('file', ssh_key_src) }}"
+        state: present
+  become: true

@@ -1,0 +1,6 @@
+---
+# Default Istio role variables
+istio_version: "1.21.6"
+istio_profile: "demo"
+istio_install_dir: "/tmp/istio-{{ istio_version }}"
+istio_kubeconfig: "{{ kubeconfig_path | default('/etc/kubernetes/admin.conf') }}"

@@ -1,0 +1,8 @@
+resources:
+  # This should point to the vendor manifests path you want to deploy.
+  # Run infra/kubeflow/vendor_manifests.ps1 and then edit this file to reference
+  # a concrete kustomize directory under infra/kubeflow/vendor/manifests.
+  # Example:
+  # - ../vendor/manifests/apps/centraldashboard/overlays/default
+
+  - ../vendor/manifests/README.md

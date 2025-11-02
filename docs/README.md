@@ -12,7 +12,11 @@
 ### Архитектура
 
 - `architecture/solution-architecture.md` — компоненты и потоки
+- `architecture/hexagonal.md` — гексагональная архитектура (порты/адаптеры)
 - `architecture/glossary.md` — глоссарий терминов
+- `architecture/erd.md` — ERD и модель данных
+- `architecture/feature-diagram.md` — диаграмма фич
+- `architecture/permissions-matrix.md` — матрица прав (RBAC)
 - `decision-records/README.md` — ADR индекс
 - `architecture/diagrams/c4-context.md` — C4 контекст
 - `architecture/diagrams/c4-container.md` — C4 контейнеры
@@ -29,6 +33,13 @@
 
 - `ai-models/model-strategy.md` — стратегия использования
 - `ai-models/metrics.md` — метрики качества AI
+- `ai-models/llm-provider/README.md` — AI Gateway (LLM provider) обзор
+- `ai-models/llm-provider/contracts.md` — контракты порта и форматы
+- `ai-models/llm-provider/providers.md` — провайдеры и конфигурации
+- `ai-models/llm-provider/prompts.md` — промпты и схемы вывода
+- `ai-models/llm-provider/retry-and-errors.md` — ретраи и ошибки
+- `ai-models/llm-provider/test-plan.md` — план тестирования
+- `ai-models/llm-provider/openapi.yaml` — OpenAPI AI Gateway
 - `templates/model-card-template.md` — карточка модели
 - `templates/dataset-card-template.md` — карточка датасета
 
@@ -40,6 +51,8 @@
 - `api/error-model.md` — модель ошибок
 - `api/authentication.md` — аутентификация
 - `api/openapi.yaml` — спецификация (минимальный черновик)
+- `api/models.md` — основные модели данных
+- `api/resources.md` — обзор ресурсов и эндпоинтов
 
 ### Operations
 
@@ -69,6 +82,7 @@
 - `ui-ux/README.md` — обзор и IA
 - `ui-ux/user-roles.md` — роли и персоны
 - `ui-ux/wireframes.md` — wireframes placeholder
+- `ui-ux/routes-and-scenarios.md` — страницы/маршруты и сценарии
 
 ### Литература
 

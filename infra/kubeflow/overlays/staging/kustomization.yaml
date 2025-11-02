@@ -1,0 +1,8 @@
+resources:
+  # Point this to a base kustomization. After running vendor_manifests.ps1,
+  # set the `base` resource in infra/kubeflow/base/kustomization.yaml to the
+  # actual vendor path you want to deploy (for example, vendor/manifests/apps/centraldashboard/overlays/istio)
+  - ../base
+
+commonLabels:
+  env: staging

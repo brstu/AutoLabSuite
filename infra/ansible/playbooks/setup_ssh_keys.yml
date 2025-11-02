@@ -1,0 +1,10 @@
+- name: Distribute SSH public key to hosts
+  hosts: all
+  become: true
+  gather_facts: false
+  roles:
+    - role: ssh_key
+      # You can override defaults here, for example:
+      # vars:
+      #   target_user: ubuntu
+      #   ssh_key_src: "roles/ssh_key/files/id_rsa.pub"

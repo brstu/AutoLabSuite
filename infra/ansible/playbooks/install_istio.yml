@@ -1,0 +1,20 @@
+- name: Install Istio control plane and wait for readiness
+  hosts: kube_control_plane
+  become: true
+  gather_facts: true
+  roles:
+    - role: istio
+
+  tasks:
+    - name: Ensure kubeconfig path is available for waiting
+      stat:
+        path: "{{ istio_kubeconfig | default('/etc/kubernetes/admin.conf') }}"
+      register: istio_kubeconf_stat
+
+    - name: Wait for istio-system deployments to be available
+      shell: "KUBECONFIG={{ istio_kubeconfig | default('/etc/kubernetes/admin.conf') }} kubectl -n istio-system wait --for=condition=available deployment --all --timeout=300s"
+      register: istio_wait
+      retries: 10
+      delay: 15
+      until: istio_wait.rc == 0
+      when: istio_kubeconf_stat.stat.exists

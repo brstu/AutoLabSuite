@@ -1,0 +1,79 @@
+---
+# Minimal bootstrap tasks for Debian/Ubuntu nodes to prepare for kubeadm
+
+- name: Disable swap
+  command: swapoff -a
+  ignore_errors: yes
+
+- name: Comment out swap entries in /etc/fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^(\s*([^#].*\s+swap\s+.*))$'
+    replace: '# \1'
+  backup: yes
+
+- name: Ensure br_netfilter module is loaded
+  modprobe:
+    name: br_netfilter
+    state: present
+
+- name: Ensure required sysctl params are set
+  sysctl:
+    name: '{{ item.name }}'
+    value: '{{ item.value }}'
+    state: present
+    reload: yes
+  loop:
+    - { name: 'net.bridge.bridge-nf-call-iptables', value: 1 }
+    - { name: 'net.ipv4.ip_forward', value: 1 }
+
+- name: Install apt prerequisites
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+
+- name: Install containerd
+  apt:
+    name: containerd
+    state: present
+    update_cache: yes
+
+- name: Add Kubernetes APT key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add Kubernetes apt repository
+  apt_repository:
+    repo: 'deb https://apt.kubernetes.io/ kubernetes-xenial main'
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install kubeadm, kubelet and kubectl
+  apt:
+    name:
+      - kubelet
+      - kubeadm
+      - kubectl
+    state: present
+    allow_unauthenticated: no
+
+- name: Hold kube packages at current version
+  command: apt-mark hold kubelet kubeadm kubectl
+  args:
+    warn: false
+
+- name: Ensure containerd is enabled and started
+  service:
+    name: containerd
+    enabled: yes
+    state: started

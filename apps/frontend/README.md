@@ -7,7 +7,7 @@
 - TypeScript / React (Next.js или Vite)
 - UI библиотека (MUI / Mantine / Tailwind)
 - State Management: Zustand / Redux Toolkit
-- Auth: OIDC/OAuth2 (через backend gateway)
+- Auth: JWT Bearer (через backend API), локальный логин (email/пароль)
 
 ## Основные зоны
 

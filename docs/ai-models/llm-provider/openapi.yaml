@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: AI Gateway API
+  version: 0.1.0
+  description: Unified API for LLM providers (external and KServe)
+servers:
+  - url: https://ai-gateway.example.com/v1
+paths:
+  /health:
+    get:
+      summary: Health probe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /models:
+    get:
+      summary: List available models
+      responses:
+        '200':
+          description: Models
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ModelInfo'
+  /models/{modelKey}:infer:
+    post:
+      summary: Direct inference for a model
+      parameters:
+        - name: modelKey
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InferRequest'
+      responses:
+        '200':
+          description: Output
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InferResponse'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
+  /grade:
+    post:
+      summary: Normalized grading call (rubric + context)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeRequest'
+      responses:
+        '200':
+          description: Grading result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeResponse'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '500': { $ref: '#/components/responses/ServerError' }
+components:
+  schemas:
+    ModelInfo:
+      type: object
+      properties:
+        key: { type: string }
+        provider: { type: string }
+        max_tokens: { type: integer }
+        context_window: { type: integer }
+    InferRequest:
+      type: object
+      properties:
+        input:
+          description: String or JSON-like structure sent to the model
+          oneOf:
+            - type: string
+            - type: object
+            - type: array
+        parameters:
+          type: object
+          properties:
+            max_tokens: { type: integer }
+            temperature: { type: number }
+            top_p: { type: number }
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              content: { type: string }
+              mime: { type: string }
+    InferResponse:
+      type: object
+      properties:
+        output:
+          oneOf:
+            - type: string
+            - type: object
+            - type: array
+        usage:
+          type: object
+          properties:
+            prompt_tokens: { type: integer }
+            completion_tokens: { type: integer }
+        provider: { type: string }
+        model: { type: string }
+        latency_ms: { type: integer }
+        trace_id: { type: string }
+    GradeRequest:
+      type: object
+      properties:
+        rubric:
+          type: object
+          properties:
+            version: { type: string }
+            criteria:
+              type: array
+              items:
+                type: object
+                properties:
+                  id: { type: string }
+                  weight: { type: number }
+        context:
+          type: object
+          properties:
+            files:
+              type: array
+              items:
+                type: object
+                properties:
+                  path: { type: string }
+                  content: { type: string }
+            metadata:
+              type: object
+              additionalProperties: true
+        prompt_template: { type: string }
+        output_schema: { type: string }
+    GradeResponse:
+      type: object
+      properties:
+        overall: { type: number }
+        criteria:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              value: { type: number }
+              max: { type: number }
+              comments: { type: string }
+              aiAssisted: { type: boolean }
+        model_snapshot: { type: string }
+        audit:
+          type: object
+          properties:
+            prompt_hash: { type: string }
+            raw:
+              type: object
+              properties:
+                prompt: { type: string }
+                response:
+                  oneOf:
+                    - type: string
+                    - type: object
+                    - type: array
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        error: { type: string }
+        details: { type: object }
+        traceId: { type: string }
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,0 +1,59 @@
+- name: Initialize Kubernetes control plane
+  hosts: kube_control_plane
+  become: true
+  gather_facts: true
+  vars:
+    pod_network_cidr: "{{ pod_network_cidr | default('192.168.0.0/16') }}"
+  tasks:
+    - name: Ensure kubeadm is available
+      command: kubeadm version
+      register: kubeadm_check
+      changed_when: false
+
+    - name: Initialize the control-plane with kubeadm
+      command: >-
+        kubeadm init --pod-network-cidr={{ pod_network_cidr }}
+      args:
+        creates: /etc/kubernetes/manifests/kube-apiserver.yaml
+      register: kubeadm_init
+
+    - name: Create .kube directory for ansible user
+      file:
+        path: "/home/{{ ansible_user | default('ubuntu') }}/.kube"
+        state: directory
+        owner: "{{ ansible_user | default('ubuntu') }}"
+        group: "{{ ansible_user | default('ubuntu') }}"
+        mode: '0755'
+
+    - name: Copy admin kubeconfig to ansible_user
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: "/home/{{ ansible_user | default('ubuntu') }}/.kube/config"
+        owner: "{{ ansible_user | default('ubuntu') }}"
+        group: "{{ ansible_user | default('ubuntu') }}"
+        mode: '0644'
+
+    - name: Ensure KUBECONFIG env for kubectl tasks
+      set_fact:
+        kubeconfig: /etc/kubernetes/admin.conf
+
+    - name: Install Calico CNI (apply manifest)
+      command: >-
+        KUBECONFIG={{ kubeconfig }} kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+      register: calico_apply
+      retries: 3
+      delay: 10
+      until: calico_apply.rc == 0
+
+    - name: Create join command for workers (print-join-command)
+      command: kubeadm token create --print-join-command --ttl 24h
+      register: kube_join
+      run_once: true
+
+    - name: Save join command to file on control-plane
+      copy:
+        content: "{{ kube_join.stdout }}"
+        dest: /tmp/kubeadm_join_cmd.sh
+        mode: '0700'
+      run_once: true
+

@@ -1,0 +1,54 @@
+---
+# Install istioctl and install Istio control plane (demo/default profile)
+
+- name: Ensure required packages are present
+  apt:
+    name:
+      - curl
+      - tar
+      - ca-certificates
+    state: present
+    update_cache: yes
+
+- name: Create Istio install directory
+  file:
+    path: "{{ istio_install_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Download Istio archive
+  get_url:
+    url: "https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    dest: "{{ istio_install_dir }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    mode: '0644'
+  register: istio_download
+  until: istio_download is succeeded
+  retries: 3
+  delay: 10
+
+- name: Extract Istio archive
+  unarchive:
+    src: "{{ istio_install_dir }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    dest: "{{ istio_install_dir }}"
+    remote_src: yes
+
+- name: Copy istioctl binary to /usr/local/bin
+  copy:
+    src: "{{ istio_install_dir }}/istio-{{ istio_version }}/bin/istioctl"
+    dest: /usr/local/bin/istioctl
+    mode: '0755'
+
+- name: Verify istioctl is available
+  command: /usr/local/bin/istioctl version --remote=false
+  register: istioctl_check
+  changed_when: false
+
+- name: Install Istio control plane using istioctl
+  command: /usr/local/bin/istioctl install --set profile={{ istio_profile }} -y --kubeconfig {{ istio_kubeconfig }}
+  args:
+    creates: /etc/istio
+  register: istio_install
+  failed_when: istio_install.rc != 0 and 'already exists' not in istio_install.stdout
+
+  # Run istioctl against the cluster's kubeconfig; ensure the file exists before running
+  when: istio_kubeconfig is defined

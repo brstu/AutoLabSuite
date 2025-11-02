@@ -6,6 +6,13 @@
 
 ## Персоны
 
+### Админ
+
+- Управление пользователями (студенты, преподаватели), группами и курсами
+- Управление ролями и правами (RBAC), аудит действий
+- Настройка интеграций (GitHub App/вебхуки, SMTP, KServe cluster)
+- Политики безопасности, квоты и лимиты
+
 ### Преподаватель
 
 - Просмотр статуса всех групп и студентов
@@ -19,6 +26,7 @@
 - Получение прозрачной обратной связи
 - Сравнение попыток и улучшений
 - Понимание дедлайнов и штрафов
+- Задавать вопросы по лабе в приложении и/или через комментарии в GitHub PR
 
 ### Maintainer / DevOps
 
@@ -34,13 +42,14 @@
 
 ## Mapping Ролей к Доменным Областям
 
-| Область | Преподаватель | Студент | Maintainer | Экзаменатор |
-|---------|---------------|---------|-----------|-------------|
-| Submissions | R/W | Create/View | View | View |
-| Rubrics | Manage | View | Manage versions | View |
-| AI Models | View metrics | - | Deploy/Config | - |
-| Analytics | View | View own | Manage pipelines | View summaries |
-| Settings | Scoped | - | Full | - |
+| Область | Админ | Преподаватель | Студент | Maintainer | Экзаменатор |
+|---------|------|---------------|---------|-----------|-------------|
+| Users/Groups/Courses | Manage | View | - | View | View |
+| Submissions | View | R/W | Create/View | View | View |
+| Rubrics | Manage | Manage | View | Manage versions | View |
+| AI Models | View metrics | View metrics | - | Deploy/Config | - |
+| Analytics | View | View | View own | Manage pipelines | View summaries |
+| Settings | Full | Scoped | - | Full | - |
 
 ## Следующие шаги
 
@@ -49,25 +58,27 @@
 
 ## RBAC Матрица (Черновик)
 
-| Ресурс / Действие | Студент | Преподаватель | Maintainer | Экзаменатор |
-|-------------------|---------|---------------|-----------|-------------|
-| Submission: Create | ✔ | ✔ (от имени) | ✖ | ✖ |
-| Submission: Read Own | ✔ | ✔ | ✔ | ✔ (итог) |
-| Submission: Read Any | ✖ | ✔ | ✔ | ✔ (итог) |
-| Submission: Update (метаданные) | ✖ | Limited (метки) | ✔ | ✖ |
-| Submission: Regrade Request | ✔ (ограничение по частоте) | ✔ (массово) | ✔ | ✖ |
-| Rubric: Create | ✖ | ✔ | ✔ | ✖ |
-| Rubric: Update | ✖ | ✔ (draft) | ✔ | ✖ |
-| Rubric: Publish | ✖ | ✔ | ✔ | ✖ |
-| Rubric: View Draft | ✖ | ✔ | ✔ | ✖ |
-| Rubric: View Published | ✔ | ✔ | ✔ | ✔ |
-| Evaluation: Read Own | ✔ | ✔ | ✔ | ✔ |
-| Evaluation: Read Any | ✖ | ✔ | ✔ | ✔ |
-| AI Model Config: Deploy | ✖ | ✖ | ✔ | ✖ |
-| AI Model Metrics: View | ✖ | ✔ (агрегаты) | ✔ (детально) | ✖ |
-| Settings: System | ✖ | ✖ | ✔ | ✖ |
-| Settings: Course Scope | ✖ | ✔ | ✔ | ✖ |
-| Audit Log: View | ✖ | Limited (по курсу) | ✔ | ✔ (read-only) |
+| Ресурс / Действие | Студент | Преподаватель | Админ | Maintainer | Экзаменатор |
+|-------------------|---------|---------------|-------|-----------|-------------|
+| Submission: Create | ✔ | ✔ (от имени) | ✖ | ✖ | ✖ |
+| Submission: Read Own | ✔ | ✔ | ✔ | ✔ | ✔ (итог) |
+| Submission: Read Any | ✖ | ✔ | ✔ | ✔ | ✔ (итог) |
+| Submission: Update (метаданные) | ✖ | Limited (метки) | ✔ | ✔ | ✖ |
+| Submission: Regrade Request | ✔ (ограничение по частоте) | ✔ (массово) | ✔ | ✔ | ✖ |
+| Rubric: Create | ✖ | ✔ | ✔ | ✔ | ✖ |
+| Rubric: Update | ✖ | ✔ (draft) | ✔ | ✔ | ✖ |
+| Rubric: Publish | ✖ | ✔ | ✔ | ✔ | ✖ |
+| Rubric: View Draft | ✖ | ✔ | ✔ | ✔ | ✖ |
+| Rubric: View Published | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Evaluation: Read Own | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Evaluation: Read Any | ✖ | ✔ | ✔ | ✔ | ✔ |
+| AI Model Config: Deploy | ✖ | ✖ | ✔ | ✔ | ✖ |
+| AI Model Metrics: View | ✖ | ✔ (агрегаты) | ✔ | ✔ (детально) | ✖ |
+| Settings: System | ✖ | ✖ | ✔ | ✔ | ✖ |
+| Settings: Course Scope | ✖ | ✔ | ✔ | ✔ | ✖ |
+| Audit Log: View | ✖ | Limited (по курсу) | ✔ | ✔ | ✔ (read-only) |
+| Q&A: Ask Teacher | ✔ | ✔ (ответ) | ✔ (модерация) | ✔ (модерация) | ✖ |
+| Integrations: GitHub Token | ✖ | ✔ (свой) | ✔ | ✔ | ✖ |
 
 Легенда: ✔ — разрешено, ✖ — запрещено, Limited — ограничено контекстом (курс, собственные разделы).
 

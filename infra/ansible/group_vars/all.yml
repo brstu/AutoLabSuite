@@ -1,0 +1,17 @@
+# Shared variables for all hosts
+---
+# Remote user used to connect (can be overridden in inventory)
+ansible_user: ubuntu
+
+# User on remote machines that should receive the authorized SSH key
+target_user: "{{ ansible_user }}"
+
+# Kubernetes version (apt package suffix for Debian/Ubuntu). Leave empty to install latest available.
+kube_version: ""
+
+# Pod network CIDR used by kubeadm. Calico default example: 192.168.0.0/16
+pod_network_cidr: "192.168.0.0/16"
+
+# Path to kubeconfig that istio role should use (will default to control-plane admin.conf)
+kubeconfig_path: "/etc/kubernetes/admin.conf"
+

@@ -1,0 +1,13 @@
+- name: Bootstrap nodes for Kubernetes (Debian/Ubuntu example)
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  roles:
+    - role: kubernetes
+
+- name: Install Istio on control-plane nodes
+  hosts: kube_control_plane
+  become: true
+  gather_facts: true
+  roles:
+    - role: istio

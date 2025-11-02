@@ -1,0 +1,15 @@
+- name: Join worker nodes to the cluster
+  hosts: kube_workers
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Get join command from control-plane host
+      command: cat /tmp/kubeadm_join_cmd.sh
+      delegate_to: "{{ groups['kube_control_plane'][0] }}"
+      register: join_cmd_result
+      run_once: true
+
+    - name: Join the node to the cluster
+      shell: "{{ join_cmd_result.stdout }} --cri-socket /var/run/containerd/containerd.sock"
+      args:
+        creates: /etc/kubernetes/kubelet.conf

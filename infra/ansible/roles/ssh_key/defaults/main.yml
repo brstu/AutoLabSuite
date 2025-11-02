@@ -1,0 +1,14 @@
+---
+# Default values for ssh_key role
+# Path is relative to playbook directory when used with lookup('file', ssh_key_src)
+ssh_key_src: "roles/ssh_key/files/id_rsa.pub"
+target_user: "{{ ansible_user | default('ubuntu') }}"
+
+# If true the role will ensure the `target_user` exists and will add a sudoers file
+# granting root-like privileges. Set to false if you don't want the role to manage the user.
+ensure_sudo_user: true
+
+# When `ensure_sudo_user` is true and `sudo_nopasswd` is true, the role will create
+# a file under `/etc/sudoers.d/` with the line: "<target_user> ALL=(ALL) NOPASSWD:ALL"
+sudo_nopasswd: true
+sudoers_file: "/etc/sudoers.d/{{ target_user }}"

@@ -7,7 +7,7 @@
 | P0 Инициализация | Скелет, ADR, модель данных черновая | README, ADR-000/001 |
 | P1 Базовый pipeline | Интеграция Git, запуск тестов, рубрики | Ingestion svc, Grading core |
 | P2 AI Feedback | Интеграция LLM, сохранение контекстов | AI svc, prompt templates |
-| P3 Analytics & UI | Дашборды, метрики, экспорт | UI mockups, API v1 |
+| P3 Analytics & UI | Дашборды, метрики, экспорт | UI прототипы (Holst), API v1 |
 | P4 Устойчивость | Масштабирование, очереди, ретраи | Orchestration, Observability |
 | P5 Безопасность | Политики данных, аудит, PII контроль | Compliance docs |
 
