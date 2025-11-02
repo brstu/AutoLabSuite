@@ -2,8 +2,7 @@
 # Формат: путь  @github-user-or-team
 # Правила применяются снизу вверх (последнее совпадение выигрывает).
 # Ротация Iteration Lead НЕ меняет codeowner автоматически, но IL отвечает за актуальность.
-# CoreOrbit (CORE) выступает глобальным fallback владельцем.
-
+# CoreOrbit (CORE) выступает глобальным fallback владельцем.# Глобальный fallback
 # Глобальный fallback
 *       @coreorbit-leads
 

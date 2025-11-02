@@ -7,8 +7,8 @@ repository:
   homepage: ""
   private: false
   has_issues: true
-  has_projects: false
-  has_wiki: false
+  has_projects: true
+  has_wiki: true
   default_branch: main
   allow_squash_merge: true
   allow_merge_commit: false
@@ -27,7 +27,8 @@ branches:
       restrictions: null
       required_status_checks:
         strict: true
-        contexts: []  # TODO: set to real CI checks, e.g., ["CI Docs Quality / Lint Markdown and HTML", "CI Docs Quality / lint"]
+        contexts:
+          - "CI Docs Quality"
       required_pull_request_reviews:
         required_approving_review_count: 1
         dismiss_stale_reviews: true
